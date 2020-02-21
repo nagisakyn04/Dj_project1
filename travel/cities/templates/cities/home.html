@@ -1,12 +1,69 @@
 {% extends "base.html"%}
 
 {% block content %}
- <h1 class="display-4"> Города</h1>
+ <h1 class="display-4 text-center my-4"> Города</h1>
 <div class="row">
-    <div class='col-md-6'>
+    <div class='col-md-6 mx-auto'>
+
+        <table class="table table-striped">
+            <tbody>
         {% for object in objects_list %}
-        <p> {{object.name}}</p>
+        <tr>
+            <td>
+                <a href="{%url 'city:detail' pk=object.pk%}">
+                {{object.name}}</a>
+            </td>
+            <td>
+                <a href="{%url 'city:update' pk=object.pk%}">
+                    <button type="button" class="btn btn-primary btn-sm">
+                        Редактировать
+                    </button>
+                </a>
+            </td>
+            <td>
+                <a href="{%url 'city:delete' pk=object.pk%}">
+                    <button type="button" class="btn btn-danger btn-sm">
+                        Удалить
+                    </button>
+                </a>
+            </td>
+        </tr>
+
         {% endfor %}
+             </tbody>
+        </table>
+            <div class="pagination my-4">
+            <span class="step-links">
+                {% if objects_list.has_previous %}
+                <a href="?page=1"><button type="button" class="btn btn-success">&laquo; first</button></a>
+                <a href="?page={{ objects_list.previous_page_number }}"><button type="button" class="btn btn-success">previous</button></a>
+                {% endif %}
+
+                <span class="current">
+                    <button type="button" class="btn btn-secondary"> Page {{ objects_list.number }} of {{ objects_list.paginator.num_pages }}.</button>
+                </span>
+
+                {% if objects_list.has_next %}
+                <a href="?page={{ objects_list.next_page_number }}"><button type="button" class="btn btn-success">next</button></a>
+                <a href="?page={{ objects_list.paginator.num_pages }}"><button type="button" class="btn btn-success">last &raquo;</button></a>
+                {% endif %}
+            </span>
+            </div>
+
     </div>
 </div>
+
+<div class="row">
+    <div class='col-md-6'>
+        <a href="{%url 'city:add' %}">
+                    <button type="button" class="btn btn-info btn-sm">
+                        Добавить новый город
+                    </button>
+                </a>
+    </div>
+</div>
+
+
+
 {% endblock %}
+
