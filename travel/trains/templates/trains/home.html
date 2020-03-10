@@ -1,0 +1,88 @@
+{% extends "base.html"%}
+
+{% block content %}
+ <h1 class="display-4 text-center my-4"> Поезда</h1>
+<div class="row">
+    <div class='col-md-8 mx-auto'>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Номер поезда</th>
+                <th>Откуда </th>
+                <th>Куда</th>
+                <th>Время в пути</th>
+                <th> &nbsp;</th>
+                <th> &nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for object in objects_list %}
+        <tr>
+            <td>
+                <a href="{}">
+                {{object.name}}</a>
+            </td>
+             <td>
+                {{object.from_city}}
+            </td>
+             <td>
+                {{object.to_city}}
+            </td>
+             <td>
+                {{object.travel_time}}
+            </td>
+            <td>
+                <a href="{}">
+                    <button type="button" class="btn btn-primary btn-sm">
+                        Редактировать
+                    </button>
+                </a>
+            </td>
+            <td>
+                <a href="{}">
+                    <button type="button" class="btn btn-danger btn-sm">
+                        Удалить
+                    </button>
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+             </tbody>
+        </table>
+            <div class="pagination my-4">
+            <span class="step-links">
+                {% if objects_list.has_previous %}
+                <a href="?page=1"><button type="button" class="btn btn-success">&laquo; first</button></a>
+                <a href="?page={{ objects_list.previous_page_number }}"><button type="button" class="btn btn-success">previous</button></a>
+                {% endif %}
+
+                <span class="current">
+                    <button type="button" class="btn btn-secondary"> Page {{ objects_list.number }} of {{ objects_list.paginator.num_pages }}.</button>
+                </span>
+
+                {% if objects_list.has_next %}
+                <a href="?page={{ objects_list.next_page_number }}"><button type="button" class="btn btn-success">next</button></a>
+                <a href="?page={{ objects_list.paginator.num_pages }}"><button type="button" class="btn btn-success">last &raquo;</button></a>
+                {% endif %}
+            </span>
+            </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class='col-md-6'>
+        <a href="{}">
+                    <button type="button" class="btn btn-info btn-sm">
+                        Добавить новый город
+                    </button>
+                </a>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
