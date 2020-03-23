@@ -1,4 +1,7 @@
 {% url 'city:home' as city_home_url %}
+{% url 'train:home' as train_home_url %}
+{% url 'city:add' as city_add_url %}
+{% url 'train:add' as train_add_url %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,6 +11,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
 
     <title>Hello,{{name}}!</title>
   </head>
@@ -24,7 +30,7 @@
 </div> -->
 <div class ='container '>
  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="{% url 'home' %}">Travel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -33,20 +39,20 @@
       <li class="nav-item {% if request.path == city_home_url %}active{% endif %}">
         <a class="nav-link" href="{%url 'city:home'%}">Города <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+      <li class="nav-item {% if request.path == train_home_url %}active{% endif %}">
+        <a class="nav-link" href="{%url 'train:home'%}">Поезда</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown {% if request.path == train_add_url or request.path == city_add_url  %}active{% endif %}">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
+          Добавить
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="{%url 'city:add'%}">Добавить город</a>
+          <a class="dropdown-item" href="{%url 'train:add'%}">Добавить поезд</a>
+          <!--<a class="dropdown-item" href="#">Something else here</a>--!>
         </div>
       </li>
     </ul>
@@ -84,7 +90,14 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script>
+      $(document).ready(function() {
+      $('.js-example-basic-single').select2();
+      $('.js-example-basic-multiple').select2();
+        });
+  </script>
   </body>
 </html>
