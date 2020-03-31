@@ -15,7 +15,7 @@
       <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
 
-    <title>Hello,{{name}}!</title>
+    <title>{% block title%} {% endblock%}</title>
   </head>
   <body>
  <!--  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -42,8 +42,8 @@
       <li class="nav-item {% if request.path == train_home_url %}active{% endif %}">
         <a class="nav-link" href="{%url 'train:home'%}">Поезда</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+      <li class="nav-item {% if request.path == list_url %} active {% endif %}">
+        <a class="nav-link" href="{%url 'list'%}">Маршруты</a>
       </li>
       <li class="nav-item dropdown {% if request.path == train_add_url or request.path == city_add_url  %}active{% endif %}">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

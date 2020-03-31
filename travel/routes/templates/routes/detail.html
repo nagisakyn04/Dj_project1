@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title%}Маршруты {% endblock%}
+
+{% block content%}
+    <h1 class="display-4 text-center my-4">Маршруты</h1>
+    <div class="row ">      
+        <div class='col-md-11 mx-auto'>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th> Название маршрута</th>
+                    <th> Откуда</th>
+                    <th> Куда</th>
+                    <th> Время в пути</th>
+                    <th> Список поездов по маршруту</th>
+                    <th> &nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                    <td> 
+                        <a href='{% url "detail" pk=object.pk%}'> 
+                            {{object.name}} 
+                        </a> 
+                    </td>
+                    <td> 
+                        
+                            {{object.from_city}} 
+                       
+                    </td>
+                    <td> 
+                        
+                            {{object.to_city}} 
+                     
+                    </td>
+                    <td> 
+                       
+                            {{object.travel_times}} 
+                        
+                    </td>
+                    <td> 
+                        {% for tr in object.across_cities.all %}
+                            {{tr}}<br/>
+                        {% endfor %}
+                             
+                        
+                    </td>
+                    <td> 
+                         <a href='{% url "delete" pk=object.pk %}'> 
+                            <button type="button" class="btn btn-danger btn-sm">
+                                Удалить 
+                            </button>
+                        </a>  
+                    </td>
+                    </tr>
+                    
+                
+                </tbody>
+            </table>
+        </div>
+    </div>     
+{% endblock%}
